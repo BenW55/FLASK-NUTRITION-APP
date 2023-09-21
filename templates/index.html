@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrition Website</title>
+    <link rel="stylesheet" href="/static/styles/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>Nutrition Hub</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a>Home</a></li>
+                <li><a>Tracker</a></li>
+                <li><a>Recipies</a></li>
+                <li><a>About</a></li>
+                <li><a href="#" id="login-button">Login</a></li> <!-- Add this line -->
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Welcome to Nutrition Hub</h2>
+            <p>Your path to a healthier lifestyle starts here.</p>
+            <a href="#" class="cta-button">Get Started</a>
+        </div>
+    </section>
+
+
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="close-login-modal">&times;</span>
+            <h2>Login</h2>
+            <form>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Nutrition Hub</p>
+        </div>
+    </footer>
+
+    <link rel="stylesheet" href="styles.css">
+</body>
+</html>
+<script src="/static/app.js"></script>
