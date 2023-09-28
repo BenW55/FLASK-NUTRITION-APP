@@ -19,3 +19,4 @@
             modal.style.display = 'none';
         }
     });
+
