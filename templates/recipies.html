@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes - Nutrition Website</title>
+    <link rel="stylesheet" href="/static/styles/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>Nutrition Hub</h1>
+                <h2>Recipies</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Tracker</a></li>
+                <li><a href="#">Recipes</a></li>
+                <li><a href="#">Notes</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#" id="login-button">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Find Delicious Recipes</h2>
+            <p>Explore a variety of healthy recipes to support your nutrition goals.</p>
+        </div>
+    </section>
+
+    <section class="recipe-search">
+        <div class="container">
+            <!-- Add your recipe search form here -->
+        </div>
+    </section>
+
+    <section class="recipe-results">
+        <div class="container">
+            <!-- Display the recipe results here using JavaScript and the API -->
+        </div>
+    </section>
+
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="close-login-modal">&times;</span>
+            <h2>Login</h2>
+            <form>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Nutrition Hub</p>
+        </div>
+    </footer>
+
+</body>
+</html>
+<script src="/static/app.js"></script>

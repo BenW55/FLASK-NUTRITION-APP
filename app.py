@@ -4,8 +4,13 @@ app = Flask(__name__)
 
 
 @app.route("/")
-def hello():
+def home():
     return render_template("index.html")
+
+
+@app.route("/recipies")
+def recipies():
+    return render_template("recipies.html")
 
 
 if __name__ == "__main__":
