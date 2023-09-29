@@ -53,21 +53,21 @@
     </div>
     <hr />
 
-    <section class="recipe-results">
-        <div class="container">
-            <!-- Display the recipe results here using JavaScript and the API -->
+    <section id = "recipe-results" class="recipe-results">
+        <div class="recipe-grid">
             {% for message in messages %}
-            <div class='message'>
-                <h3>{{ message['title'] }}</h3>
-                <p>Calories</p>
-                <p>{{ message['calories'] }}</p>
-                <p>Protein</p>
-                <p>{{ message['protein'] }}</p>
-                <p>Fat</p>
-                <p>{{ message['fat'] }}</p>
-                <p>Carbs</p>
-                <p>{{ message['carbs'] }}</p>
-            </div>
+            <a onclick="getSpecificRecipie(this)" data-id="{{ message['id'] }}" data-title="{{ message['title'] }}" data-calories="{{ message['calories'] }}" data-protein="{{ message['protein'] }}" data-fat="{{ message['fat'] }}" data-carbs="{{ message['carbs'] }}" data-image="{{ message['image'] }}">
+                <div class='message'>
+                    <h3 id="{{ message['id'] }}">{{ message['title'] }}</h3>
+                    <p>Calories: {{ message['calories'] }}</p>
+                    <p>Protein: {{ message['protein'] }}</p>
+                    <p>Fat: {{ message['fat'] }}</p>
+                    <p>Carbs: {{ message['carbs'] }}</p>
+                    <div class="image-container">
+                        <img src="{{ message['image'] }}" alt="Recipe Image">
+                    </div>
+                </div>
+            </a>
             {% endfor %}
         </div>
     </section>

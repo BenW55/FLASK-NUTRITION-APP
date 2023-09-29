@@ -19,4 +19,16 @@
             modal.style.display = 'none';
         }
     });
+function getSpecificRecipie()
+{   
+    let element = document.getElementById("recipe-results");
+    element.innerHTML = "";
+    /** let recipie = document.getElementById();
+    url="/specificRecipie";
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            
+        }); */
 
+}
