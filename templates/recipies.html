@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipes - Nutrition Website</title>
-    <link rel="stylesheet" href="/static/styles/styles.css">
+    <link rel="stylesheet" href="/static/styles/recipiesStyles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
@@ -27,7 +27,7 @@
     </header>
 
     <div class="input-container">
-        <form method = 'POST' action="/search">
+        <form id = "myForm">
             <div class="input-group">
                 <label for="protein">Calories</label>
                 <input type="text" name = "calories" id="calories" placeholder="Enter calories">
@@ -54,24 +54,14 @@
     <hr />
 
     <section id = "recipe-results" class="recipe-results">
-        <div class="recipe-grid">
-            {% for message in messages %}
-            <a onclick="getSpecificRecipie(this)" data-id="{{ message['id'] }}" data-title="{{ message['title'] }}" data-calories="{{ message['calories'] }}" data-protein="{{ message['protein'] }}" data-fat="{{ message['fat'] }}" data-carbs="{{ message['carbs'] }}" data-image="{{ message['image'] }}">
-                <div class='message'>
-                    <h3 id="{{ message['id'] }}">{{ message['title'] }}</h3>
-                    <p>Calories: {{ message['calories'] }}</p>
-                    <p>Protein: {{ message['protein'] }}</p>
-                    <p>Fat: {{ message['fat'] }}</p>
-                    <p>Carbs: {{ message['carbs'] }}</p>
-                    <div class="image-container">
-                        <img src="{{ message['image'] }}" alt="Recipe Image">
-                    </div>
-                </div>
-            </a>
-            {% endfor %}
+        <div class="recipe-grid" id = "recpie-Grid">
+
         </div>
     </section>
-
+    <div id="recipe-details">
+        <!-- Dynamic HTML content will be inserted here -->
+    </div>
+    </section>
     <div id="login-modal" class="modal">
         <div class="modal-content">
             <span class="close-button" id="close-login-modal">&times;</span>
@@ -87,11 +77,172 @@
     </div>
 
     <footer>
-        <div class="container">
             <p>&copy; 2023 Nutrition Hub</p>
-        </div>
     </footer>
 
 </body>
 </html>
-<script src="/static/app.js"></script>
+<script>
+    var myform = document.getElementById("myForm");
+
+    myform.addEventListener("submit", getRecipies);
+
+    // Get the modal and close button elements
+    const modal = document.getElementById('login-modal');
+    const closeButton = document.getElementById('close-login-modal');
+    const loginButton = document.getElementById('login-button');
+
+    // Show the login modal when the login button is clicked
+    loginButton.addEventListener('click', () => {
+        modal.style.display = 'block';
+    });
+
+    // Close the login modal when the close button or outside the modal is clicked
+    closeButton.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+function getSpecificRecipie(recipeId)
+{   
+    let id = recipeId.getAttribute('data-id');
+    let element = document.getElementById("recpie-Grid");
+    element.innerHTML = "";
+    
+    console.log(id)
+    $.ajax({
+                url: '/specificRecipie',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ 'id': id }),
+                success: function(data){
+                    const recipeDetailsHtml = `
+                <h1 class="recipe-title" > ${data.title}</h1>
+                <img src="${data.image}" alt="Recipe Image">
+                <p><strong>Servings:</strong> ${data.servings}</p>
+                <p><strong>Ready In Minutes:</strong> ${data.readyInMinutes}</p>
+                <p><strong>Source:</strong> <a href="${data.sourceUrl}" target="_blank">${data.sourceName}</a></p>
+                <p><strong>Health Score:</strong> ${data.healthScore}</p>
+                <p><strong>Spoonacular Score:</strong> ${data.spoonacularScore}</p>
+                <p><strong>Price Per Serving:</strong> $${data.pricePerServing.toFixed(2)}</p>
+                <p><strong>Dish Types:</strong> ${data.dishTypes.join(', ')}</p>
+                
+                <h2 class="recipe-subtitle" >Ingredients:</h2>
+                <ul>
+                    ${data.extendedIngredients.map(ingredient => `<li>${ingredient.original}</li>`).join('')}
+                </ul>
+                
+                <h2 class="recipe-subtitle" >Summary:</h2>
+                <p>${data.summary}</p>
+                
+                <h2 class="recipe-subtitle" >Wine Pairing:</h2>
+                <p><strong>Paired Wines:</strong> ${data.winePairing.pairedWines.join(', ')}</p>
+                <p><strong>Pairing Text:</strong> ${data.winePairing.pairingText}</p>
+                
+                <h3 class="recipe-subtitle">Product Matches:</h3>
+                <ul>
+                    ${data.winePairing.productMatches.map(product => `
+                        <li>
+                            <strong>${product.title}</strong><br>
+                            <p>Description: ${product.description}</p>
+                            <p>Price: ${product.price}</p>
+                            <img src="${product.imageUrl}" alt="Product Image">
+                        </li>`).join('')}
+                </ul>
+            `;
+
+            // Insert the dynamic HTML content into the recipe-details div
+            $('#recipe-details').html(recipeDetailsHtml);
+            $('#recipe-details').show();
+                }
+            });
+
+}
+function getRecipies(event)
+{
+    event.preventDefault();
+    var specificRecipie = document.getElementById("recipe-details");
+    specificRecipie.innerHTML = "";
+    var myForm = document.getElementById("myForm");
+    var formData = new FormData(myForm);
+    var data = {};
+    // Get iterators for keys and values
+    const keys = formData.keys();
+    const values = formData.values();
+
+    formData.forEach(function(value, key) {
+    data[key] = value;
+    });
+    $.ajax({
+                url: '/search',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                success: function(data){
+                    for(var i = 0; i < data.length; i ++)
+                    {
+                        var message = data[i];
+                        var recipeResults = document.getElementById('recipe-results');
+                        var recipeGrid = document.getElementById('recpie-Grid');
+                        var aElement = document.createElement('a');
+                        aElement.setAttribute('onclick', 'getSpecificRecipie(this)');
+                        aElement.setAttribute('data-id', message.id);
+                        aElement.setAttribute('data-title', message.title);
+                        aElement.setAttribute('data-calories', message.calories);
+                        aElement.setAttribute('data-protein', message.protein);
+                        aElement.setAttribute('data-fat', message.fat);
+                        aElement.setAttribute('data-carbs', message.carbs);
+                        aElement.setAttribute('data-image', message.image);
+
+                        var divElement = document.createElement('div');
+                        divElement.className = 'message';
+
+                        var h3Element = document.createElement('h3');
+                        h3Element.id = message.id;
+                        h3Element.textContent = message.title;
+
+                        var caloriesP = document.createElement('p');
+                        caloriesP.textContent = 'Calories: ' + message.calories;
+
+                        var proteinP = document.createElement('p');
+                        proteinP.textContent = 'Protein: ' + message.protein;
+
+                        var fatP = document.createElement('p');
+                        fatP.textContent = 'Fat: ' + message.fat;
+
+                        var carbsP = document.createElement('p');
+                        carbsP.textContent = 'Carbs: ' + message.carbs;
+
+                        var imageContainerDiv = document.createElement('div');
+                        imageContainerDiv.className = 'image-container';
+
+                        var imgElement = document.createElement('img');
+                        imgElement.src = message.image;
+                        imgElement.alt = 'Recipe Image';
+
+                        imageContainerDiv.appendChild(imgElement);
+
+                        divElement.appendChild(h3Element);
+                        divElement.appendChild(caloriesP);
+                        divElement.appendChild(proteinP);
+                        divElement.appendChild(fatP);
+                        divElement.appendChild(carbsP);
+                        divElement.appendChild(imageContainerDiv);
+
+                        aElement.appendChild(divElement);
+
+                        // Append the created elements to the document or a container element
+                        recipeGrid.appendChild(aElement);
+                        
+                        
+                    }
+                }
+            });
+    
+}
+
+</script>

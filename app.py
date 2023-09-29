@@ -19,11 +19,12 @@ def recipies():
 
 @app.route("/search", methods=["POST"])
 def search():
-    protein = request.form.get("protein")
-    fats = request.form.get("fats")
-    carbs = request.form.get("carbs")
-    num_recipes = request.form.get("num_recipes")
-    calories = request.form.get("calories")
+    data = request.get_json()
+    protein = data["protein"]
+    fats = data["fats"]
+    carbs = data["carbs"]
+    num_recipes = data["num_recipes"]
+    calories = data["calories"]
     messages = [
         {
             "content": protein,
@@ -43,13 +44,26 @@ def search():
     ]
 
     # You can now use the collected data (protein, fats, carbs, num_recipes) as needed
-    data = recipieSearch(messages)
-    return render_template("recipies.html", messages=data)
+    messages = recipieSearch(messages)
+    return jsonify(messages)
 
 
-"""@app.route("/specificRecipie", method=["POST"])
+@app.route("/specificRecipie", methods=["POST"])
 def specificRecipie():
-    return"""
+    url = f"https://api.spoonacular.com/recipes/"
+    if request.method == "POST":
+        data = request.get_json()
+        id = data["id"]
+        print(id)
+        url = url + id + "/information"
+        print(url)
+        params = {"apiKey": API_KEY, "id": id}
+        response = requests.get(url, params=params)
+        if response.status_code == 200:
+            response = response.json()
+            print(response)
+            return response
+        return render_template("recipies.html")
 
 
 def recipieSearch(messages):

@@ -113,6 +113,7 @@ footer {
     background-color: #333;
     color: #fff;
     text-align: center;
+    padding-top: 0;
     
 }
 .box-container {
@@ -170,7 +171,7 @@ footer {
 .recipe-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Two columns */
-    gap: 20px; /* Spacing between grid items */
+    grid-gap: 20px; /* Spacing between grid items */
     width: 80%; /* Adjust the width as needed */
     margin: 0 auto; /* Center the grid */
 }
@@ -179,8 +180,40 @@ footer {
     background-color: #f0f0f0;
     padding: 20px;
     border: 1px solid #ccc;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto; /* Define rows for each content element */
+}
+
+.text-container {
+    grid-row: 1 / 4; /* Span multiple rows for text content */
 }
 
 .image-container img {
     max-width: 100%;
+}
+#recipe-details {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+/* Style for the specific h1 and h2 elements */
+.recipe-title {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.recipe-subtitle {
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
 }
