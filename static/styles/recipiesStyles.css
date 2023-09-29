@@ -25,14 +25,6 @@ header {
     color: #fff;
 }
 
-.hero {
-    background-image: url('hero-image.jpg');
-    background-size: cover;
-    color: #fff;
-    text-align: center;
-    padding: 100px 0;
-}
-
 .cta-button {
     display: inline-block;
     background-color: #FFA500;
@@ -121,7 +113,7 @@ footer {
     background-color: #333;
     color: #fff;
     text-align: center;
-    padding: 10px 0;
+    
 }
 .box-container {
     margin-top: 1.2vh;
@@ -146,4 +138,31 @@ footer {
 .logo h2 {
     margin: 0; /* Remove any default margin on the <h2> element */
     color: #FFA500; /* Style the color of the new header element */
+}
+.input-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 20px;
+    align-items: center;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.input-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-group input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px; /* Adjust width as needed */
 }

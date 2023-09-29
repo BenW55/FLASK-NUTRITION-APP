@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipes - Nutrition Website</title>
     <link rel="stylesheet" href="/static/styles/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     <header>
@@ -13,8 +14,9 @@
                 <h1>Nutrition Hub</h1>
                 <h2>Recipies</h2>
             </div>
+            <hr />
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li><a href="#">Tracker</a></li>
                 <li><a href="#">Recipes</a></li>
                 <li><a href="#">Notes</a></li>
@@ -24,22 +26,49 @@
         </nav>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h2>Find Delicious Recipes</h2>
-            <p>Explore a variety of healthy recipes to support your nutrition goals.</p>
-        </div>
-    </section>
-
-    <section class="recipe-search">
-        <div class="container">
-            <!-- Add your recipe search form here -->
-        </div>
-    </section>
+    <div class="input-container">
+        <form method = 'POST' action="/search">
+            <div class="input-group">
+                <label for="protein">Calories</label>
+                <input type="text" name = "calories" id="calories" placeholder="Enter calories">
+            </div>
+            <div class="input-group">
+                <label for="protein">Protein</label>
+                <input type="text" name = "protein" id="protein" placeholder="Enter protein value">
+            </div>
+            <div class="input-group">
+                <label for="fats">Fats</label>
+                <input type="number" name = "fats" id="fats" placeholder="Enter fats value">
+            </div>
+            <div class="input-group">
+                <label for="carbs">Carbs</label>
+                <input type="number" name = "carbs" id="carbs" placeholder="Enter carbs value">
+            </div>
+            <div class="input-group">
+                <label for="num_recipes">Number of Recipes</label>
+                <input type="number" name = "num_recipes" id="num_recipes" placeholder="Enter number of recipes">
+            </div>
+            <button id="submit-button">Submit</button>
+        </form>
+    </div>
+    <hr />
 
     <section class="recipe-results">
         <div class="container">
             <!-- Display the recipe results here using JavaScript and the API -->
+            {% for message in messages %}
+            <div class='message'>
+                <h3>{{ message['title'] }}</h3>
+                <p>Calories</p>
+                <p>{{ message['calories'] }}</p>
+                <p>Protein</p>
+                <p>{{ message['protein'] }}</p>
+                <p>Fat</p>
+                <p>{{ message['fat'] }}</p>
+                <p>Carbs</p>
+                <p>{{ message['carbs'] }}</p>
+            </div>
+            {% endfor %}
         </div>
     </section>
 
