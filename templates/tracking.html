@@ -29,15 +29,22 @@
     <div class="input-container">
         <form id = "calWeight">
             <div class = "inputDiv">
-                <label for="cal">Calories</label>
-                <input type="number" id = "cal" name="cal">
-            </div>
-            <div class = "inputDiv">
-                <label for="weight">Weight</label>
-                <input type="number" id = "weight" name="weight">
-            </div>
+                <div>
+                    <label for="cal">Calories</label>
+                    <input type="number" id = "cal" name="cal" required>
+                </div>
+                <div>
+                    <label for="weight">Weight</label>
+                    <input type="number" id = "weight" name="weight" required>
+                </div>
+                <div>
+                    <label for="dateInput">Date:</label>
+                    <input type="date" id="dateInput" required>
+                </div>
+            
 
             <button class= "subButton" type="submit">Add Data</button>
+            </div>
         </form>
     </div>
 
@@ -53,31 +60,28 @@
     var myform = document.getElementById("calWeight");
     const cal = []
     const weight = []
+    const time = []
     myform.addEventListener("submit", updateChart);
     const data = {
-      labels: weight,
+      labels: time,
       datasets: [{
-        label: 'Weekly Sales',
+        label: 'Calories',
         data: cal,
-        backgroundColor: [
+        backgroundColor:
           'rgba(255, 26, 104, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-          'rgba(0, 0, 0, 0.2)'
-        ],
-        borderColor: [
+        borderColor:
           'rgba(255, 26, 104, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-          'rgba(0, 0, 0, 1)'
-        ],
-        borderWidth: 1
+        borderWidth: 1,
+        yAxisID: 'y'
+      },{
+        label: 'Weight',
+        data: weight,
+        backgroundColor: 
+          'rgba(120, 26, 75, 0.2)',
+        borderColor:
+          'rgba(124, 12, 104, 1)',
+        borderWidth: 1,
+        yAxisID: 'weight'
       }]
     };
 
@@ -88,7 +92,17 @@
       options: {
         scales: {
           y: {
-            beginAtZero: true
+            beginAtZero: true,
+            type: 'linear',
+            position: 'left'
+          },
+          weight:{
+            beginAtZero: true,
+            type: 'linear',
+            position: 'right',
+            grid: {
+                drawOnChartArea: false
+            }
           }
         }
       }
@@ -119,6 +133,13 @@
         });
         cal.push(calWeight["cal"]);
         weight.push(calWeight["weight"]);
+        let date = document.querySelector('#dateInput');
+        let day = new Date(date.value);
+        let stringDay = day.toString();
+        let stringDayArray = stringDay.split(" ");
+
+        time.push(stringDayArray[1] +" " +  stringDayArray[2] + " " + stringDayArray[3]);
+        
         myChart.update();
     }
     </script>

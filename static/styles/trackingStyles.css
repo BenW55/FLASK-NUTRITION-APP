@@ -114,19 +114,28 @@ header {
     
     
   }
-  .inputDiv{
-    
+  .inputDiv {
+    width: 80vw;
     padding: 20px;
     border-radius: 20px;
     border: solid 3px #FFA500;
     background: white;
     margin: 10px;
-    
-  }
-  .subButton{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inputDiv div {
+    flex: 1; /* Distribute available space evenly among label-input pairs */
+    margin-right: 10px; /* Add spacing between label-input pairs */
+}
+
+.subButton {
     padding: 20px;
     border-radius: 20px;
     border: solid 3px #FFA500;
     background: white;
     margin: 10px;
-  }
+    align-self: flex-end;
+}
