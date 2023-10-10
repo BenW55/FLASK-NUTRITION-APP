@@ -17,6 +17,11 @@ def recipies():
     return render_template("recipies.html")
 
 
+@app.route("/tracking")
+def tracking():
+    return render_template("tracking.html")
+
+
 @app.route("/search", methods=["POST"])
 def search():
     data = request.get_json()

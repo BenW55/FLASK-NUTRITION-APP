@@ -1,0 +1,132 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    margin-bottom: 5vh;
+}
+
+.nav-links {
+    list-style: none;
+}
+
+.nav-links li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: #FFA500;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.box-container {
+    margin-top: 1.2vh;
+    margin-bottom: 2vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 1fr;
+    gap: 20px;
+    justify-content: center;
+    height: 70vh; /* Reduce the height to leave some space at the bottom */
+}
+.logo{
+    display: flex;
+    justify-content: space-between; /* Separate the two headers */
+    align-items: center; /* Vertically center the content */
+    
+}
+.logo h1 {
+    margin: 0; /* Remove any default margin on the <h1> element */
+}
+
+.logo h2 {
+    margin: 0; /* Remove any default margin on the <h2> element */
+    color: #FFA500; /* Style the color of the new header element */
+}
+.input-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 20px;
+    align-items: center;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.input-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-group input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px; /* Adjust width as needed */
+}
+/* Add this CSS to set up the grid layout */
+.chartMenu {
+    width: 100vw;
+    height: 40px;
+    background: #1A1A1A;
+    
+  }
+  .chartMenu p {
+    padding: 10px;
+    font-size: 20px;
+  }
+  .chartCard {
+    width: 100vw;
+    height: calc(100vh - 40px);
+    display: flex;
+    flex-direction: column; /* Make the container a column layout */
+    align-items:center;
+  }
+  .chartBox {
+    margin-top: 10vh;
+    width: 700px;
+    padding: 20px;
+    border-radius: 20px;
+    border: solid 3px #FFA500;
+    background: white;
+    
+    
+  }
+  .inputDiv{
+    
+    padding: 20px;
+    border-radius: 20px;
+    border: solid 3px #FFA500;
+    background: white;
+    margin: 10px;
+    
+  }
+  .subButton{
+    padding: 20px;
+    border-radius: 20px;
+    border: solid 3px #FFA500;
+    background: white;
+    margin: 10px;
+  }

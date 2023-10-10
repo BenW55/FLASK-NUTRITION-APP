@@ -12,16 +12,16 @@
         <nav>
             <div class="logo">
                 <h1>Nutrition Hub</h1>
-                <h2>Recipies</h2>
+                <h2>Recipes</h2>
             </div>
             <hr />
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
-                <li><a href="#">Tracker</a></li>
+                <li><a href="/tracking">Tracker</a></li>
                 <li><a href="#">Recipes</a></li>
                 <li><a href="#">Notes</a></li>
                 <li><a href="#">About</a></li>
-                <li><a href="#" id="login-button">Login</a></li>
+                
             </ul>
         </nav>
     </header>
@@ -76,9 +76,7 @@
         </div>
     </div>
 
-    <footer>
-            <p>&copy; 2023 Nutrition Hub</p>
-    </footer>
+
 
 </body>
 </html>
@@ -120,6 +118,9 @@ function getSpecificRecipie(recipeId)
                 contentType: 'application/json',
                 data: JSON.stringify({ 'id': id }),
                 success: function(data){
+                    console.log(data.pricePerServing)
+                    let price  = data.pricePerServing;
+                    price = price * (1/100)
                     const recipeDetailsHtml = `
                 <h1 class="recipe-title" > ${data.title}</h1>
                 <img src="${data.image}" alt="Recipe Image">
@@ -128,7 +129,7 @@ function getSpecificRecipie(recipeId)
                 <p><strong>Source:</strong> <a href="${data.sourceUrl}" target="_blank">${data.sourceName}</a></p>
                 <p><strong>Health Score:</strong> ${data.healthScore}</p>
                 <p><strong>Spoonacular Score:</strong> ${data.spoonacularScore}</p>
-                <p><strong>Price Per Serving:</strong> $${data.pricePerServing.toFixed(2)}</p>
+                <p><strong>Price Per Serving:</strong> $${price}</p>
                 <p><strong>Dish Types:</strong> ${data.dishTypes.join(', ')}</p>
                 
                 <h2 class="recipe-subtitle" >Ingredients:</h2>
@@ -139,20 +140,7 @@ function getSpecificRecipie(recipeId)
                 <h2 class="recipe-subtitle" >Summary:</h2>
                 <p>${data.summary}</p>
                 
-                <h2 class="recipe-subtitle" >Wine Pairing:</h2>
-                <p><strong>Paired Wines:</strong> ${data.winePairing.pairedWines.join(', ')}</p>
-                <p><strong>Pairing Text:</strong> ${data.winePairing.pairingText}</p>
-                
-                <h3 class="recipe-subtitle">Product Matches:</h3>
-                <ul>
-                    ${data.winePairing.productMatches.map(product => `
-                        <li>
-                            <strong>${product.title}</strong><br>
-                            <p>Description: ${product.description}</p>
-                            <p>Price: ${product.price}</p>
-                            <img src="${product.imageUrl}" alt="Product Image">
-                        </li>`).join('')}
-                </ul>
+
             `;
 
             // Insert the dynamic HTML content into the recipe-details div
