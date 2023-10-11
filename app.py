@@ -22,6 +22,11 @@ def tracking():
     return render_template("tracking.html")
 
 
+@app.route("/notes")
+def notes():
+    return render_template("notes.html")
+
+
 @app.route("/search", methods=["POST"])
 def search():
     data = request.get_json()

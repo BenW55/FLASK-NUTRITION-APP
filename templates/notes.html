@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang = "en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Lifting Notes</title>
+        <link rel="stylesheet" href="/static/styles/notesStyles.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    </head>
+    <header id = "mainHeader">
+        <nav>
+            <div class="logo">
+                <h1 class="headers">Nutrition Hub</h1>
+                <h2 class="headers">Home</h2>
+            </div>
+            <hr />
+            <ul class="nav-links">
+                <li><a href = "/">Home</a></li>
+                <li><a href = "/tracking">Tracker</a></li>
+                <li><a href ="/recipies">Recipes</a></li>
+                <li><a>Notes</a></li>
+                <li><a>About</a></li> <!-- Add this line -->
+            </ul>
+        </nav>
+    </header>
+    <body>
+        <div class="popup-box">
+            <div class="popup">
+                <div class="content">
+                        <header>
+                            <p>Add a new Note</p>
+                            <i class="uil uil-times"></i>
+                        </header>
+                    
+                    <form action="#">
+                        <div class="row title">
+                            <label >Title</label>
+                            <input type="text">
+                        </div>
+                        <div class="row description">
+                            <label >Description</label>
+                            <textarea></textarea>
+                        </div>
+                        <button>Add Note</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper">
+            <li class="add-box">
+                <div class="icon"><i class="uil uil-plus"></i></div>
+                <p>Add new Note</p>
+            </li>
+            
+        </div>
+        <script src="/static/script.js"></script>
+    </body>
+
+</html>
