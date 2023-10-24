@@ -1,8 +1,8 @@
     // setup 
     var myform = document.getElementById("calWeight");
-    const cal = JSON.parse(localStorage.getItem("cal") || "[]");
-    const weight = JSON.parse(localStorage.getItem("weight") || "[]");
-    const time = JSON.parse(localStorage.getItem("time") || "[]");
+    var cal = JSON.parse(localStorage.getItem("cal") || "[]");
+    var weight = JSON.parse(localStorage.getItem("weight") || "[]");
+    var time = JSON.parse(localStorage.getItem("time") || "[]");
     myform.addEventListener("submit", updateChart);
     const data = {
       labels: time,
@@ -86,3 +86,22 @@
         localStorage.setItem("time", JSON.stringify(time));
         myChart.update();
     }
+function clearData()
+{
+  let confirmDel = confirm("Are you sure you want to delete this note?");
+  if(!confirmDel) return;
+  localStorage.setItem("time", []);
+  localStorage.setItem("cal", []);
+  localStorage.setItem("weight", []);
+  const length = myChart.data.datasets[0].data.length;
+  for(let i = 0; i < length; i++)
+  {
+    console.log(i);
+    myChart.data.labels.pop(i, 1);
+    myChart.data.datasets[0].data.pop(i, 1);
+  }
+
+
+  
+  myChart.update();
+}

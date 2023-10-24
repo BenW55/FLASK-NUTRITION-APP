@@ -141,3 +141,11 @@ header {
     margin: 10px;
     align-self: flex-end;
 }
+#deleteButton{
+    float:right;
+    color:#FFA500;
+}
+#deleteButton:hover
+{
+    cursor: pointer;
+}
